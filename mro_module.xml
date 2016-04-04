@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="maint_req_tree_view">
+            <field name="name">maintenance_order.tree</field>
+            <field name="model">mro_module.maintenance_order</field>
+            <field name="arch" type="xml">
+                <tree string="maintenance Tree">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="maintenance_type"/>
+                    <field name="description"/>
+                    <field name="source_document"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="maintenance_order_form_view">
+            <field name="name">maintenance_order.form</field>
+            <field name="model">mro_module.maintenance_order</field>
+            <field name="arch" type="xml">
+                <form string="maintenance_order Form">
+                    <header>
+                        <button name="action_inprocess" type="object"
+                                string="Confirm Maintenance"
+                                states="draft"
+                                class="oe_highlight"/>
+
+                        <button name="action_cancel" type="object"
+                                attrs="{'invisible': [('state', 'in', ['done', 'cancel'])]}"
+                                string="Cancel"
+                                class="oe_highlight"/>
+
+                        <button name="action_done" type="object"
+                                string="Done"
+                                states="inprocess"
+                                class="oe_highlight"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,inprocess,done"/>
+                    </header>
+                <sheet>
+                    
+                        <group>
+                            <group string="">
+                                <field name="name"/>
+                                <field name="product_id"/>
+                                <field name="maintenance_type"/>
+                                <field name="description"/>
+                            </group>
+
+                            <group string="">
+                                <field name="planned_date"/>
+                                <field name="scheduled_date"/>
+                                <field name="execution_date"/>
+                                <field name="source_document"/>
+                            </group>
+                        </group>
+                      
+
+                        <notebook>
+                            <page string="Problem Description">
+                                <field name="description"/>
+                            </page>
+
+                            <page string="Parts">
+                                <tr>
+                                    <td colspan="4"><strong>Planned Parts</strong></td>
+                                    <field name="part_ids"/>
+                                </tr>
+                            </page>
+
+                    <!--        <page string="Tools">
+                              <tr>
+                                    <td colspan="4"><strong>Description for Tools</strong></td>
+                                    <field name="description"/>
+                                </tr>
+                            </page>  -->
+
+                            <page string="Labour">
+                                <tr>
+                                    <td colspan="4"><strong>Description for Labor</strong></td>
+                                    <field name="description"/>
+                                </tr>
+                            </page>
+
+                    <!--        <page string="Operation">
+                                <tr>
+                                    <td colspan="4"><strong>Description for Operations</strong></td>
+                                    <field name="description"/>
+                                </tr>
+                            </page>   -->
+
+                    <!--        <page string="Documentation">
+                              <tr>
+                                    <td colspan="4"><strong>Description for Documentation</strong></td>
+                                    <field name="description"/>
+                                </tr>
+                            </page>   -->
+
+                        </notebook>
+
+                    </sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="maintenance_order_list_action">
+            <field name="name">Maintenance Order</field>
+            <field name="res_model">mro_module.maintenance_order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">maintain the first request</p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_mro_module_menu" name="MRO"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="mro_module_menu" name="MRO"
+                  parent="main_mro_module_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="maintenance_order_menu" name="Maintenance Order" parent="mro_module_menu" sequence="10" action="maintenance_order_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+
+
+<!--wizard view-->
+        <record model="ir.actions.act_window" id="maint_wiz_action">
+            <field name="name">Contacts</field>
+
+            <field name="res_model">mro_module.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+<!--address wizard-->
+
+        <record model="ir.actions.act_window" id="maint_addr_action">
+            <field name="name">Address</field>
+
+            <field name="res_model">mro_module.addres</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+<!--maintenance_request-->
+        <record model="ir.ui.view" id="maint_req_form_view">
+            <field name="name">maintenance_request.form</field>
+            <field name="model">mro_module.maintenance_request</field>
+            <field name="arch" type="xml">
+                <form string="mro_module Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!-- menu after reference-->
+
+        <!-- override the automatically generated list view for courses -->
+        <record model="ir.ui.view" id="maint_req_tree_view">
+            <field name="name">maintenance_request.tree</field>
+            <field name="model">mro_module.maintenance_request</field>
+            <field name="arch" type="xml">
+                <tree string="maintenance Tree">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                <field name="req_date"/>
+                <field name="Cause"/>
+                </tree>
+            </field>
+        </record>
+
+<!-- the action that will trigger by create button-->
+
+
+        <record model="ir.actions.act_window" id="maint_cont_list_action">
+            <field name="name">Maintenance contact</field>
+
+            <field name="res_model">mro_module.maint_cont</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+               <!-- <form string="Contact detail">
+           <sheet>
+             <group>
+               <field name="cont_nm"/>
+               <field name="cont_title"/>
+               <field name="cont_job_post"/>
+               <field name="cont_eml"/>
+               <field name="cont_phn"/>
+               <field name="cont_mob"/>
+               <field name="cont_note"/>
+             </group>
+                   </sheet>
+
+           </form>-->
+            
+        </record>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="maint_req_list_action">
+            <field name="name">Maintenance Request</field>
+
+            <field name="res_model">mro_module.maintenance_request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first course
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="maint_req_menu" name="Maintenance Request" parent="mro_module_menu" sequence="5"
+                  action="maint_req_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+        <!-- session form view -->
+
+        <record model="ir.ui.view" id="maint_req_form_view">
+            <field name="name">mro_module.form</field>
+            <field name="model">mro_module.maintenance_request</field>
+
+            <field name="arch" type="xml">
+            
+            
+                <form string="maintenance request">
+        
+                 <header>
+                        <button name="action_claim" type="object"
+                                string="Send Request"
+                                states="draft"
+                                class="oe_highlight"/>
+
+                        <button name="action_reject" type="object"
+                
+                                string="Reject Request"
+                                states="rejected"
+                                class="oe_highlight"/>
+
+                       <button name="action_cancel" type="object"
+                                attrs="{'invisible': [('state', 'in', ['rejected', 'cancel'])]}"
+                                string="Cancel"
+                                class="oe_highlight"/>
+
+                        
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,claim,execution"/>
+                    </header>
+                
+                    <sheet>
+            
+                        <group>
+                        <group>
+                            <field name="name"/>
+                           <!-- <field name="req_date"/>
+                            <field name="exec_date"/>-->
+                            <field name="product_id" />
+                            <field name="Cause" />
+                            <field name="Breakdown"/>
+                            
+                        </group>
+                <group string="Schedule" >
+                    <field name="req_date"/>
+                            <field name="exec_date" />
+                        </group>
+                <group string="Description">
+                    <field name="description"/>
+                        </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+<!--contact view-->
+<record model="ir.ui.view" id="maint_cont_form_view">
+            <field name="name">mro_module.form</field>
+            <field name="model">mro_module.maint_cont</field>
+            <field name="arch" type="xml">
+                <form string="maintenance contact">
+                    <sheet>
+                        
+                  <group>
+                     <field name="cont_nm"/>
+                     <field name="cont_title"/>
+                     <field name="cont_job_post"/>
+                     <field name="cont_eml"/>
+                <!--     <field name="cont_phn"/> -->
+                     <field name="cont_mob"/>
+                     <field name="cont_note"/>
+                  </group>
+                       
+                 </sheet>
+                 </form>
+      </field>
+</record>
+<!--product view-->
+
+        <record model="ir.ui.view" id="maint_produ_form_view">
+            <field name="name">mro_module.form</field>
+            <field name="model">mro_module.maint_produ</field>
+            <field name="arch" type="xml">
+                <form string="maintenance Product">
+                    <sheet>
+                        <group>
+                        <group>
+                    <field name="tag" widget="many2many_tags" options="{'create_edit': True}"/>
+                            <field name="prod_loc"/>
+                     
+                        </group>
+                <group>
+                    <field name="active"/>
+                </group>
+                <group>
+                    <field name="critic"/>
+                            <field name="assign"/>
+                </group>
+                        </group>
+            <notebook>
+                <page string="Info">
+                    <group>
+                <group string="Product detail">
+                    <field name="prod_no"/>
+                    <field name="prod_mod"/>
+                    <field name="prod_ser"/>
+                </group>
+                <group>
+                
+                </group>
+                <group string="Warranty">
+                    <field name="prod_manu"/>
+                    <field name="prod_dt_st"/>
+                    <field name="prod_dt_wrnty"/>
+                </group>
+                <group string="Vendor">
+                    <field name="prod_vend"/>
+                    <field name="prod_pur_dt"/>
+                    <field name="prod_war_end"/>
+                </group>
+                             </group>
+                            </page>
+            </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+<!-- product location-->
+        <record model="ir.ui.view" id="maint_loc_form_view">
+            <field name="name">mro_module.form</field>
+            <field name="model">mro_module.maint_loc</field>
+            <field name="arch" type="xml">
+                <form string="Product Location">
+                    <sheet>
+                        <group string="Product Location">
+                        <group string="Additional Information">
+                            <field name="loc_type"/>
+                            <field name="loc_owner"/>
+                            <field name="loc_scrap"/>
+                            <field name="loc_return"/>
+                            <field name="loc_active"/>
+                     
+                        </group>
+                <group string="Localization">
+                    <field name="loc_corridor"/>
+                    <field name="loc_shelves"/>
+                    <field name="loc_height"/>
+                    <field name="loc_barcode"/>
+                </group>
+                
+                        </group>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+<!--manufacturer detail-->
+<record model="ir.ui.view" id="maint_manuf_form_view">
+            <field name="name">mro_module.form</field>
+            <field name="model">mro_module.maint_manuf</field>
+            <field name="arch" type="xml">
+                <form string="Product Manufacturer">
+                    <sheet>
+                        <group string="Manufacturer">
+                        <group>
+                            <field name="manuf_add"/>
+                            <field name="manuf_website"/>
+                            
+               
+                        </group>
+                <group>
+                    <field name="manuf_job_post"/>
+                    <field name="manuf_phn"/>
+                    <field name="manuf_mob"/>
+                    <field name="manuf_fax"/>
+                    <field name="manuf_eml"/>
+                    <field name="manuf_title"/>
+                    <field name="manuf_lang"/>
+                    <field name="manuf_tags"/>
+                </group>
+                
+                        </group>
+                        <notebook>
+                <page string="Contact and Address">
+                <group>
+                    <button string="create" type="action" name="%(maint_cont_list_action)d"/>
+                    <button string="wizard" type="action" name="%(maint_wiz_action)d"/>
+
+                </group>
+                </page>
+                <page string="Internal Notes">
+                <group>
+
+                    <field name="manuf_desc"/>
+                </group>
+                </page>
+                <page string="Sales and Purchase">
+                <group string="Sale">
+
+                    <field name="manuf_cust"/>
+                    <field name="manuf_sale"/>
+
+
+                </group>
+                <group string="Purchase">
+
+                    <field name="manuf_vend"/>
+                </group>
+                <group string="Misc">
+
+                    <field name="manuf_intref"/>
+                </group>
+                <group string="Payments">
+
+                    <field name="manuf_bnk_act">Bank Account</field>
+                </group>
+                </page>
+
+            </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!-- vendor detail-->
+
+<record model="ir.ui.view" id="maint_vend_form_view">
+            <field name="name">mro_module.form</field>
+            <field name="model">mro_module.maint_vend</field>
+            <field name="arch" type="xml">
+                <form string="Vendor">
+                    <sheet>
+                        <group string="Vendor">
+                        <group>
+                            <field name="vend_add"/>
+                            <field name="vend_website"/>
+                            
+               
+                        </group>
+                <group>
+                    <field name="vend_job_post"/>
+                    <field name="vend_phn"/>
+                    <field name="vend_mob"/>
+                    <field name="vend_fax"/>
+                    <field name="vend_eml"/>
+                    <field name="vend_title"/>
+                    <field name="vend_lang"/>
+                    <field name="vend_tags"/>
+                </group>
+                
+                        </group>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+<!--wizard view -->
+
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">mro_module.wizard</field>
+           <!-- <field name="model">mro_module.maint_wiz</field>-->
+            <field name="arch" type="xml">
+                <form string="Contact">
+        <header>
+        <group>
+         <field name="wiz_type" options="{'horizontal': true}" class="oe_edit_only" widget="radio"/>
+         <button string="Detail" type="action" name="%(maint_addr_action)d"/>
+        </group>
+        </header>
+                  <sheet>
+        
+                    <group>
+                        <field name="wiz_cont"/>
+            <field name="wiz_title"/>
+            <field name="wiz_post"/>
+            <field name="wiz_emil"/>
+          <!--  <field name="wiz_phn"/>  -->
+            <field name="wiz_mob"/>
+            <field name="wiz_note"/>
+
+                                        
+                    </group>
+           </sheet>
+            <footer>
+                       <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+<!--Address wizard view-->
+<record model="ir.ui.view" id="Addres_form_view">
+            <field name="name">addres.form</field>
+            <field name="model">mro_module.addres</field>
+           <!-- <field name="model">maintenance.maint_wiz</field>-->
+            <field name="arch" type="xml">
+                <form string="Address">
+        
+                  <sheet>
+        
+                    <group>
+                        <field name="add_addr"/>
+            
+                                        
+                    </group>
+           </sheet>
+            <footer>
+                       <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>             
+    </data>
+</openerp>
+

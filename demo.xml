@@ -1,0 +1,395 @@
+<openerp>
+    <data>
+        <record model="mro_module.maintenance_order" id="Maintenance Order 01">
+            <field name="name">maintenance order 1</field>
+            <field name="description">maintain</field>
+            <field name="maintenance_type">ct</field>
+        </record>
+        <record model="mro_module.maintenance_order" id="Maintenance Order 02">
+            <field name="name">maintenance order 2</field>
+            <field name="description">maintain</field>
+            <field name="maintenance_type">bd</field>
+        </record>
+        <record model="mro_module.maintenance_order" id="Maintenance Order 03">
+            <field name="name">maintenance order 3</field>
+            <field name="description">maintain</field>
+            <field name="maintenance_type">ct</field>
+        </record>
+
+        <record id="product.vehicle" model="product.category">
+            <field name="name">Vehicles</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="product.truck11" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">Truck</field>
+            <field name="description_sale">Truck description</field>
+            <field name="price">150.0</field>
+            <field name="standard_price">100.0</field>
+            <field name="list_price">150.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_TRUCK</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/truck.jpg"/>
+        </record>
+
+        <record id="product.bus" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">Bus</field>
+            <field name="description_sale">Bus description</field>
+            <field name="price">15000.0</field>
+            <field name="standard_price">16000.0</field>
+            <field name="list_price">16000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_BUS</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/bus.jpeg"/>
+        </record>
+
+        <record id="product.bike11" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">Bike</field>
+            <field name="description_sale">Bike description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1600.0</field>
+            <field name="list_price">1600.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_BIKE</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/bike.jpg"/>
+        </record>
+
+        
+        <record id="product.computer" model="product.category">
+            <field name="name">Computer</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="product.cpu1" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">computer</field>
+            <field name="description_sale">Computer description</field>
+            <field name="price">15000.0</field>
+            <field name="standard_price">16000.0</field>
+            <field name="list_price">16000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_COMPUTER</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/cpu.jpg"/>
+        </record>
+
+        <record id="product.mouse1" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">Mouse</field>
+            <field name="description_sale">MOUSE description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1600.0</field>
+            <field name="list_price">1600.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_MOUSE</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/mouse.jpg"/>
+        </record>
+
+        <record id="product.monitor1" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">Monitor</field>
+            <field name="description_sale">Monitor description</field>
+            <field name="price">15000.0</field>
+            <field name="standard_price">16000.0</field>
+            <field name="list_price">16000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_monitor</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/monitor.png"/>
+        </record>
+
+        
+        <record id="product.mobile" model="product.category">
+            <field name="name">Mobiles</field>
+            <field name="sequence">3</field>
+        </record> 
+        <record id="product.parts" model="product.category">
+            <field name="name">Parts</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="product.nokia1" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">nokia</field>
+            <field name="description_sale">nokia description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1600.0</field>
+            <field name="list_price">1600.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_nokia</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/nokia.jpg"/>
+        </record>
+        <record id="product.gionee1" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">gionee</field>
+            <field name="description_sale">gionee description</field>
+            <field name="price">15000.0</field>
+            <field name="standard_price">16000.0</field>
+            <field name="list_price">16000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_gionee</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/gionee.jpg"/>
+        </record>                       
+
+        #computer spareparts..........................................
+        
+        <record id="pro_harddrive" model="product.template">
+            <field name="categ_id" ref='product.parts'/>
+            <field name="name">Harddrive</field>
+            <field name="description_sale">Harddrive description</field>
+            <field name="price">150.0</field>
+            <field name="standard_price">100.0</field>
+            <field name="list_price">150.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_HARDDRIVE</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/index.jpeg"/>
+        </record>
+
+        <record id="pro_speaker" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">SPEAKER</field>
+            <field name="description_sale">SPEAKER description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_SPEAKER</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/SPEAKER.jpg"/>
+        </record>  
+        <record id="pro_fan" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">FAN</field>
+            <field name="description_sale">FAN description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_FAN</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/fan.jpeg"/>
+        </record> 
+        <record id="pro_KEYBOARD" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">KEYBOARD</field>
+            <field name="description_sale">KEYBOARD description</field>
+            <field name="price">1000.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_KEYBOARD</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/keyboard.jpeg"/>
+        </record> 
+        <record id="pro_MOTHERBOARD" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">MOTHERBOARD</field>
+            <field name="description_sale">MOTHERBOARD description</field>
+            <field name="price">15000.0</field>
+            <field name="standard_price">10000.0</field>
+            <field name="list_price">15000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_MOTHERBOARD</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/motherboard.jpeg"/>
+        </record>   
+        <record id="pro_processor" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">PROCESSOR</field>
+            <field name="description_sale">PROCESSOR description</field>
+            <field name="price">10000.0</field>
+            <field name="standard_price">9000.0</field>
+            <field name="list_price">10000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_PROCESSOR</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/processor.jpeg"/>
+        </record> 
+        <record id="pro_cddrive" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">CDDRIVE</field>
+            <field name="description_sale">CDDRIVE description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_CDDRIVE</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/CDDRIVE.jpg"/>
+        </record>
+        <record id="pro_DISPLAY" model="product.template">
+            <field name="categ_id" ref="product.computer"/>
+            <field name="name">DISPLAY</field>
+            <field name="description_sale">DISPLAY description</field>
+            <field name="price">15000.0</field>
+            <field name="standard_price">10000.0</field>
+            <field name="list_price">15000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_DISPLAY</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/DISPLAY.jpg"/>
+        </record> 
+
+        #VEHICLE SPAREPARTS.......................................................
+
+        <record id="pro_gears" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">GEARS</field>
+            <field name="description_sale">GEARS description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_GEARS</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/GEAR.jpg"/>
+        </record> 
+        <record id="pro_sparkplug" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">SPARKPLUG</field>
+            <field name="description_sale">SPARKPLUG description</field>
+            <field name="price">150.0</field>
+            <field name="standard_price">100.0</field>
+            <field name="list_price">150.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_SPARKPLUG</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/SPARKPLUG.jpg"/>
+        </record> 
+        <record id="pro_body" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">BODY</field>
+            <field name="description_sale">BODY description</field>
+            <field name="price">15000.0</field>
+            <field name="standard_price">10000.0</field>
+            <field name="list_price">15000.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_BODY</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/BODY.jpg"/>
+        </record> 
+        <record id="pro_wheels" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">WHEELS</field>
+            <field name="description_sale">WHEELS description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_WHEELS</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/wheels.jpeg"/>
+        </record> 
+        <record id="pro_bufferspring" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">BUFFERSPRING</field>
+            <field name="description_sale">BUFFERSPRING description</field>
+            <field name="price">150.0</field>
+            <field name="standard_price">100.0</field>
+            <field name="list_price">150.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_BUFFERSPRING</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/BUFFERSPRING.jpg"/>
+        </record> 
+        <record id="pro_brake" model="product.template">
+            <field name="categ_id" ref="product.vehicle"/>
+            <field name="name">BRAKE</field>
+            <field name="description_sale">BRAKE description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_BRAKE</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/BRAKE.jpg"/>
+        </record> 
+
+        #mobile spareparts......................................................
+
+        <record id="pro_mobDISPLAY" model="product.template">
+            <field name="categ_id" ref="product.mobile"/>
+            <field name="name">MOBDISPLAY</field>
+            <field name="description_sale">mobDISPLAY description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_mobDISPLAY</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/mobDISPLAY.png"/>
+        </record>
+        <record id="pro_keypad" model="product.template">
+            <field name="categ_id" ref="product.mobile"/>
+            <field name="name">KEYPAD</field>
+            <field name="description_sale">KEYPAD description</field>
+            <field name="price">150.0</field>
+            <field name="standard_price">100.0</field>
+            <field name="list_price">150.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_KEYPAD</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/KEYPAD.jpg"/>
+        </record> 
+        <record id="pro_TOUCHPAD" model="product.template">
+            <field name="categ_id" ref="product.mobile"/>
+            <field name="name">TOUCHPAD</field>
+            <field name="description_sale">TOUCHPAD description</field>
+            <field name="price">1500.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="list_price">1500.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_TOUCHPAD</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/TOUCHPAD.jpg"/>
+        </record> 
+        <record id="pro_battery" model="product.template">
+            <field name="categ_id" ref="product.mobile"/>
+            <field name="name">BATTERY</field>
+            <field name="description_sale">BATTERY description</field>
+            <field name="price">1459.0</field>
+            <field name="standard_price">1068.0</field>
+            <field name="list_price">1459.0</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">PROD_BATTERY</field>
+            <field name="image" type="base64" file="mro_module/static/src/img/BATTERY.jpg"/>
+        </record>
+    </data>
+</openerp>
